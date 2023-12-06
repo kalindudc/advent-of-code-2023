@@ -1,5 +1,3 @@
-use std::convert::TryInto;
-
 advent_of_code::solution!(1);
 
 pub fn part_one(input: &str) -> Option<u32> {
@@ -21,14 +19,15 @@ pub fn part_one(input: &str) -> Option<u32> {
                 break;
             }
         }
-
-        sum += digit.parse::<u32>().unwrap();
+        if digit.len() == 2 {
+          sum += digit.parse::<u32>().unwrap();
+        }
     }
     Some(sum)
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    let mut valid_nums: [&str; 9] = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    let valid_nums: [&str; 9] = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
     let mut sum: u32 = 0;
 
     for line in input.lines() {
@@ -85,7 +84,7 @@ mod tests {
     #[test]
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, Some(142));
+        assert_eq!(result, Some(209));
     }
 
     #[test]
